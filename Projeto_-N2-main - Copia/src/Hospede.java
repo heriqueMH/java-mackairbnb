@@ -29,7 +29,7 @@ public class Hospede extends Usuario {
         setPropriedade(idEscolhido);
         break;
       case 2:
-        MackAirbnb.exibirTodasPropriedades();
+        GerenciadorPropriedades.exibirTodasPropriedades();
         System.out.println("");
         System.out.println("Digite o ID da propriedade desejada");
         int id = scanner.nextInt();
@@ -45,7 +45,7 @@ public class Hospede extends Usuario {
   }
 
   public void setPropriedade(int id) {
-    Propriedade propriedadeEscolhida = MackAirbnb.getPropriedadeId(id);
+    Propriedade propriedadeEscolhida = GerenciadorPropriedades.getPropriedadeId(id);
     if (propriedadeEscolhida != null) {
       System.out.println("Qual a Data de check-in (YYYY-MM-DD):");
       String checkInStr = scanner.nextLine();

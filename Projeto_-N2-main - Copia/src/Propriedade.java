@@ -20,7 +20,7 @@ public class Propriedade {
     this.precoPorNoite = precoPorNoite;
     this.fotos = new ArrayList<>();
     this.avaliacoes = new ArrayList<>();
-    this.id = MackAirbnb.getInstancia().proximoId++;
+    this.id = GerenciadorPropriedades.getInstancia().proximoId++;
   }
 
   public int getId() {

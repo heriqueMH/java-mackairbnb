@@ -10,7 +10,7 @@ public class Proprietario extends Usuario {
   }
 
   public void exibirPropriedades() {
-    MackAirbnb gerenciador = MackAirbnb.getInstancia();
+    GerenciadorPropriedades gerenciador = GerenciadorPropriedades.getInstancia();
     List<Propriedade> minhasPropriedades = gerenciador.getPropriedadesPorProprietario(this);
 
     if (minhasPropriedades.isEmpty()) {
@@ -53,7 +53,7 @@ public class Proprietario extends Usuario {
   public void cadastrarNovaPropriedade(Usuario proprietario, String titulo, String descricao, String localizacao,
       int capacidade, double precoPorNoite) {
     Propriedade propriedade = new Propriedade(titulo, descricao, localizacao, capacidade, precoPorNoite);
-    MackAirbnb.getInstancia().cadastrarPropriedade(propriedade, proprietario);
+    GerenciadorPropriedades.getInstancia().cadastrarPropriedade(propriedade, proprietario);
   }
 
   public void excluirPropriedade() {
@@ -61,7 +61,7 @@ public class Proprietario extends Usuario {
     System.out.print("Digite o ID da propriedade a ser excluída: ");
     int idPropriedade = scanner.nextInt();
     scanner.nextLine();
-    MackAirbnb.getInstancia().excluirPropriedade(idPropriedade);
+    GerenciadorPropriedades.getInstancia().excluirPropriedade(idPropriedade);
   }
 
   @Override
