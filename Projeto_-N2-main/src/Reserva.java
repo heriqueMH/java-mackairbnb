@@ -13,14 +13,14 @@ public class Reserva {
   private List<Avaliacao> avaliacoes;
 
   public Reserva(Propriedade propriedade, Hospede hospede) {
-    this.numReserva +=1 ;
+    this.numReserva += 1;
     this.propriedade = propriedade;
     this.hospede = hospede;
     this.avaliacoes = new ArrayList<>();
     this.confirmacaoReserva = false;
   }
 
-  public int getReserva(){
+  public int getReserva() {
     return numReserva;
   }
 
@@ -30,7 +30,7 @@ public class Reserva {
 
   public Propriedade getPropriedade() {
     return propriedade;
-  } 
+  }
 
   public Hospede getHospede() {
     return hospede;
@@ -44,19 +44,34 @@ public class Reserva {
     return dataCheckIn;
   }
 
+  public void setDataCheckIn(LocalDate dataCheckIn) {
+    this.dataCheckIn = dataCheckIn;
+  }
+
   public LocalDate getDataCheckOut() {
     return dataCheckOut;
   }
 
-  public void confirmarReserva() {
-    if (realizarPagamento()) {
-        this.confirmacaoReserva = true;
-    } else {
-        System.out.println("Falha no pagamento. Reserva não confirmada.");
+  public void setDataCheckOut(LocalDate dataCheckOut) {
+    this.dataCheckOut = dataCheckOut;
+  }
+
+  public void confirmarReserva(int numReserva) {
+    if (this.getReserva() == numReserva) {
+        if (!this.isConfirmacaoReserva()) {
+            if (this.realizarPagamento()) {
+                this.confirmacaoReserva = true;
+                System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
+            } else {
+                System.out.println("Falha no pagamento. Reserva não confirmada.");
+            }
+        } else {
+            System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
+        }
     }
   }
 
-  private boolean realizarPagamento() { 
+  private boolean realizarPagamento() {
     return true;
   }
 
@@ -71,9 +86,9 @@ public class Reserva {
 
   public boolean estadiaConcluida() {
     if (dataSaidaReal != null) {
-        LocalDate hoje = LocalDate.now();
-        return hoje.isAfter(dataSaidaReal) || hoje.isEqual(dataSaidaReal);
+      LocalDate hoje = LocalDate.now();
+      return hoje.isAfter(dataSaidaReal) || hoje.isEqual(dataSaidaReal);
     }
     return false;
-}
+  }
 }

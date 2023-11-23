@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class Hospede extends Usuario {
   public Hospede(String nome, String cpf, String email, String endereco, String senha) {
     super(nome, cpf, email, endereco, senha);
     this.reservas = new ArrayList<>();
-    this.scanner = new Scanner(System.in);
+    scanner = new Scanner(System.in);
   }
 
   public void cadastrarNovaReserva() {
@@ -20,57 +21,70 @@ public class Hospede extends Usuario {
     System.out.print("Escolha uma opção: ");
     int opcaoSubMenu = scanner.nextInt();
     scanner.nextLine();
-    
-    switch (opcaoSubMenu) {
-        case 1:
-            System.out.println("Digite o Id da propriedade.");
-            int idEscolhido = scanner.nextInt();
-            setPropriedade(idEscolhido);
-            break;
-        case 2:
-            GerenciadorPropriedades.exibirTodasPropriedades();
-            System.out.println("");
-            System.out.println("Digite o ID da propriedade desejada");
-            int id = scanner.nextInt();
-            setPropriedade(id);
-            break;
-        case 3:
-            break;
-        default:
-            System.out.println("Opção inválida.");
-            break;
-    }
 
+    switch (opcaoSubMenu) {
+      case 1:
+        System.out.println("Digite o Id da propriedade.");
+        int idEscolhido = scanner.nextInt();
+        setPropriedade(idEscolhido);
+        break;
+      case 2:
+        GerenciadorPropriedades.exibirTodasPropriedades();
+        System.out.println("");
+        System.out.println("Digite o ID da propriedade desejada");
+        int id = scanner.nextInt();
+        setPropriedade(id);
+        break;
+      case 3:
+        break;
+      default:
+        System.out.println("Opção inválida.");
+        break;
+
+    }
   }
 
-  public void setPropriedade(int id){
+  public void setPropriedade(int id) {
     Propriedade propriedadeEscolhida = GerenciadorPropriedades.getPropriedadeId(id);
-    Reserva novaReservaLista = new Reserva(propriedadeEscolhida, this);
-    reservas.add(novaReservaLista);
-    System.out.println("Reserva cadastrada com sucesso.");
+    if (propriedadeEscolhida != null) {
+      System.out.println("Qual a Data de check-in (YYYY-MM-DD):");
+      String checkInStr = scanner.nextLine();
+      LocalDate checkIn = LocalDate.parse(checkInStr);
+
+      System.out.println("Qual a Data de check-out (YYYY-MM-DD):");
+      String checkOutStr = scanner.nextLine();
+      LocalDate checkOut = LocalDate.parse(checkOutStr);
+
+      Reserva novaReserva = new Reserva(propriedadeEscolhida, this);
+      novaReserva.setDataCheckIn(checkIn);
+      novaReserva.setDataCheckOut(checkOut);
+
+      reservas.add(novaReserva);
+      System.out.println("Reserva cadastrada com sucesso.");
+    }
   }
 
   public void excluirReserva(int numeroReserva) {
     Reserva reservaParaExcluir = null;
     for (Reserva reserva : reservas) {
-        if (reserva.getReserva() == numeroReserva) {
-            reservaParaExcluir = reserva;
-            break;
-        }
+      if (reserva.getReserva() == numeroReserva) {
+        reservaParaExcluir = reserva;
+        break;
+      }
     }
     if (reservaParaExcluir != null) {
-        reservas.remove(reservaParaExcluir);
-        System.out.println("Reserva excluída com sucesso.");
+      reservas.remove(reservaParaExcluir);
+      System.out.println("Reserva excluída com sucesso.");
     } else {
-        System.out.println("Reserva não encontrada.");
+      System.out.println("Reserva não encontrada.");
     }
   }
 
   public Reserva getReserva(int numeroReserva) {
     for (Reserva reserva : reservas) {
-        if (reserva.getReserva() == numeroReserva) {
-            return reserva;
-        }
+      if (reserva.getReserva() == numeroReserva) {
+        return reserva;
+      }
     }
     return null;
   }
@@ -79,21 +93,56 @@ public class Hospede extends Usuario {
     if (reservas.isEmpty()) {
       System.out.println("Você não possui reservas.");
     } else {
+      boolean reservaPendente = false;
       System.out.println("----- SUAS RESERVAS -----");
       for (Reserva reserva : reservas) {
         System.out.println("Número da reserva: " + reserva.getReserva());
-        // Exibir outras informações relevantes da reserva
+        System.out.println("Propriedade: " + reserva.getPropriedade().getTitulo());
+        System.out.println("Data de Check-in: " + reserva.getDataCheckIn());
+        System.out.println("Data de Check-out: " + reserva.getDataCheckOut());
+        System.out.println("Confirmação de Reserva: " + (reserva.isConfirmacaoReserva() ? "Confirmada" : "Pendente"));
+        System.out.println("---------------------------------");
+
+        if (!reserva.isConfirmacaoReserva()) {
+          reservaPendente = true;
+        }
+      }
+
+      if (reservaPendente) {
+        System.out.println("Deseja confirmar alguma reserva pendente? (S/N)");
+        String resposta = scanner.nextLine().toUpperCase();
+        if (resposta != "N") {
+          System.out.print("Digite o número da reserva a ser confirmada: ");
+          int numReserva = scanner.nextInt();
+          confirmarReservaPendente(numReserva);
+        }
       }
     }
   }
 
-  public void avaliarPropriedade(Reserva reserva, Avaliacao avaliacao) {
-    if (reserva.estadiaConcluida()) {
-      reserva.getPropriedade().receberAvaliacao(avaliacao);
-    } else {
-      System.out.println("Avaliação disponível somente após o término da estadia.");
+  public void confirmarReservaPendente(int numReserva) {
+    for (Reserva reserva : reservas) {
+      if (reserva.getReserva() == numReserva && !reserva.isConfirmacaoReserva()) {
+        reserva.confirmarReserva(numReserva);
+        return;
+      }
     }
-  } 
+    System.out.println("Reserva não encontrada ou já confirmada.");
+  }
+
+  public void avaliarPropriedade(int idReserva, Avaliacao avaliacao) {
+    Reserva reserva = getReserva(idReserva);
+
+    if (reserva != null) {
+        if (reserva.estadiaConcluida()) {
+            reserva.getPropriedade().receberAvaliacao(avaliacao);
+        } else {
+            System.out.println("Avaliação disponível somente após o término da estadia.");
+        }
+    } else {
+        System.out.println("Reserva não encontrada.");
+    }
+  }
 
   public static void menuDeCadastro() {
     Scanner scanner = new Scanner(System.in);
@@ -110,7 +159,6 @@ public class Hospede extends Usuario {
 
     Hospede hospede = new Hospede(nome, cpf, email, endereco, senha);
     cadastrarNovoUsuario(hospede);
-    
   }
 
   public static Hospede cadastrarHospede(String nome, String cpf, String email, String endereco, String senha) {
@@ -119,7 +167,6 @@ public class Hospede extends Usuario {
   }
 
   public void excluirReserva(Reserva reserva, String senha) {
-
     System.out.print("Digite a senha para confirmar a exclusão da reserva: ");
     String senhaDigitada = scanner.nextLine();
 
@@ -131,7 +178,7 @@ public class Hospede extends Usuario {
         System.out.println("Reserva não encontrada.");
       }
     } else {
-     System.out.println("Senha incorreta. A exclusão da reserva não foi realizada.");
+      System.out.println("Senha incorreta. A exclusão da reserva não foi realizada.");
     }
   }
 
@@ -164,9 +211,6 @@ public class Hospede extends Usuario {
       default:
         System.out.println("Opção inválida.");
         break;
-      }
+    }
   }
 }
-
-
-

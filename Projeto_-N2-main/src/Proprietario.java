@@ -4,39 +4,29 @@ import java.util.Scanner;
 public class Proprietario extends Usuario {
   private Scanner scanner;
 
-  public Proprietario(String nome,String cpf, String email, String endereco, String senha) {
+  public Proprietario(String nome, String cpf, String email, String endereco, String senha) {
     super(nome, cpf, email, endereco, senha);
     this.scanner = new Scanner(System.in);
   }
 
-  public void cadastrarNovaPropriedade(Proprietario proprietario, String titulo, String descricao, String localizacao, int capacidade, double precoPorNoite) {
-    Propriedade propriedade = new Propriedade(titulo, descricao, localizacao, capacidade, precoPorNoite);
-    GerenciadorPropriedades gerenciador = GerenciadorPropriedades.getInstance();
-    gerenciador.cadastrarPropriedade(propriedade, this);
-  }
-
-  public void excluirPropriedade() {
-    // Lógica para excluir uma propriedade
-  }
-
   public void exibirPropriedades() {
-    GerenciadorPropriedades gerenciador = GerenciadorPropriedades.getInstance();
+    GerenciadorPropriedades gerenciador = GerenciadorPropriedades.getInstancia();
     List<Propriedade> minhasPropriedades = gerenciador.getPropriedadesPorProprietario(this);
 
     if (minhasPropriedades.isEmpty()) {
-        System.out.println("Você não possui propriedades cadastradas.");
+      System.out.println("Você não possui propriedades cadastradas.");
     } else {
-        System.out.println("----- SUAS PROPRIEDADES -----");
-        for (Propriedade propriedade : minhasPropriedades) {
-            System.out.println("ID: " + propriedade.getId());
-            System.out.println("Título: " + propriedade.getTitulo());
-            System.out.println("Descrição: " + propriedade.getDescricao());
-            System.out.println("------------------------------");
-        }
+      System.out.println("----- SUAS PROPRIEDADES -----");
+      for (Propriedade propriedade : minhasPropriedades) {
+        System.out.println("ID: " + propriedade.getId());
+        System.out.println("Título: " + propriedade.getTitulo());
+        System.out.println("Descrição: " + propriedade.getDescricao());
+        System.out.println("------------------------------");
+      }
     }
   }
 
-  public static void menuDeCadastro() throws Exception {
+  public static void menuDeCadastro() {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Digite o nome do proprietário: ");
     String nome = scanner.nextLine();
@@ -54,9 +44,24 @@ public class Proprietario extends Usuario {
 
   }
 
-  public static Proprietario cadastrarProprietario(String nome, String cpf, String email, String endereco, String senha) {
+  public static Proprietario cadastrarProprietario(String nome, String cpf, String email, String endereco,
+      String senha) {
     Proprietario novoProprietario = new Proprietario(nome, cpf, email, endereco, senha);
     return novoProprietario;
+  }
+
+  public void cadastrarNovaPropriedade(Usuario proprietario, String titulo, String descricao, String localizacao,
+      int capacidade, double precoPorNoite) {
+    Propriedade propriedade = new Propriedade(titulo, descricao, localizacao, capacidade, precoPorNoite);
+    GerenciadorPropriedades.getInstancia().cadastrarPropriedade(propriedade, proprietario);
+  }
+
+  public void excluirPropriedade() {
+    System.out.println("----- EXCLUSÃO DE PROPRIEDADE -----");
+    System.out.print("Digite o ID da propriedade a ser excluída: ");
+    int idPropriedade = scanner.nextInt();
+    scanner.nextLine();
+    GerenciadorPropriedades.getInstancia().excluirPropriedade(idPropriedade);
   }
 
   @Override
@@ -90,7 +95,7 @@ public class Proprietario extends Usuario {
         double precoPorNoite = scanner.nextDouble();
         scanner.nextLine();
 
-        cadastrarNovaPropriedade(this, titulo, descricao, localizacao, capacidade, precoPorNoite);
+        cadastrarNovaPropriedade(Usuario.getUsuario(this), titulo, descricao, localizacao, capacidade, precoPorNoite);
         break;
       case 3:
         excluirPropriedade();
@@ -102,6 +107,5 @@ public class Proprietario extends Usuario {
         System.out.println("Opção inválida.");
         break;
     }
-      
   }
 }

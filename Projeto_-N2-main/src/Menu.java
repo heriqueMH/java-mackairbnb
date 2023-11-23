@@ -10,6 +10,7 @@ public class Menu {
   public void exibirMenu() throws Exception {
     int opcaoMenu = 0;
     do {
+      System.out.println("");
       System.out.println("----- MENU -----");
       System.out.println("1. Usuário já cadastrado");
       System.out.println("2. Cadastrar novo usuário");
@@ -17,24 +18,24 @@ public class Menu {
       System.out.println("4. Sair do programa");
       System.out.print("Escolha uma opção: ");
       opcaoMenu = scanner.nextInt();
-      scanner.nextLine(); 
+      scanner.nextLine();
       switch (opcaoMenu) {
-          case 1:
-            Usuario user = autenticarUsuario();
-            user.exibirMenu();
-            break;
-          case 2:
-            exibirSubMenuCadastro();
-            break;
-          case 3:
-            excluirUsuario();
-            break;
+        case 1:
+          Usuario user = autenticarUsuario();
+          user.exibirMenu();
+          break;
+        case 2:
+          exibirSubMenuCadastro();
+          break;
+        case 3:
+          excluirUsuario();
+          break;
       }
     } while (opcaoMenu != 4);
   }
 
   public Usuario autenticarUsuario() {
-    Usuario usuarioAutenticado =null;
+    Usuario usuarioAutenticado = null;
     while (usuarioAutenticado == null) {
       System.out.print("Digite o nome do usuário: ");
       String nome = scanner.next();
@@ -43,17 +44,17 @@ public class Menu {
 
       usuarioAutenticado = Usuario.buscarUsuario(nome, senha);
       if (usuarioAutenticado != null) {
-          System.out.println("Usuário autenticado! Bem-vindo, " + usuarioAutenticado.getNome() + ".");
-          return usuarioAutenticado;
+        System.out.println("Usuário autenticado! Bem-vindo, " + usuarioAutenticado.getNome() + ".");
+        return usuarioAutenticado;
       } else {
-          System.out.println("Usuário ou senha incorretos.");
-          return null;
+        System.out.println("Usuário ou senha incorretos.");
+        return null;
       }
     }
     return usuarioAutenticado;
   }
 
-  public void exibirSubMenuCadastro() throws Exception{
+  public void exibirSubMenuCadastro() throws Exception {
     System.out.println("");
     System.out.println("----- SUBMENU DE CADASTRO -----");
     System.out.println("1. Cadastrar Hóspede");

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Propriedade{
-  private Proprietario proprietario;
+public class Propriedade {
+  private Usuario proprietario;
   private int id;
   private String titulo;
   private String descricao;
@@ -13,7 +13,6 @@ public class Propriedade{
   private List<Avaliacao> avaliacoes;
 
   public Propriedade(String titulo, String descricao, String localizacao, int capacidade, double precoPorNoite) {
-    this.id = id++;
     this.titulo = titulo;
     this.descricao = descricao;
     this.localizacao = localizacao;
@@ -21,6 +20,7 @@ public class Propriedade{
     this.precoPorNoite = precoPorNoite;
     this.fotos = new ArrayList<>();
     this.avaliacoes = new ArrayList<>();
+    this.id = GerenciadorPropriedades.getInstancia().proximoId++;
   }
 
   public int getId() {
@@ -31,11 +31,11 @@ public class Propriedade{
     this.id = id;
   }
 
-  public void setProprietario(Proprietario proprietario) {
+  public void setProprietario(Usuario proprietario) {
     this.proprietario = proprietario;
   }
 
-  public Proprietario getProprietario() {
+  public Usuario getProprietario() {
     return proprietario;
   }
 
@@ -43,7 +43,8 @@ public class Propriedade{
     avaliacoes.add(avaliacao);
   }
 
-  public double calcularCustoTotal(int quantidadeDias) { //ainda precisa ser ajudatado (o dia da saida do usuário pode ser diferente do estipulado na Reserva)
+  public double calcularCustoTotal(int quantidadeDias) { // ainda precisa ser ajudatado (o dia da saida do usuário pode
+                                                         // ser diferente do estipulado na Reserva)
     return quantidadeDias * precoPorNoite;
   }
 
@@ -104,4 +105,3 @@ public class Propriedade{
   }
 
 }
-

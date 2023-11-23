@@ -4,20 +4,21 @@ import java.util.List;
 public class GerenciadorPropriedades {
   private static GerenciadorPropriedades instancia = null;
   private static List<Propriedade> propriedades;
-  private int proximoId;
+  public int proximoId;
 
   private GerenciadorPropriedades() {
+    propriedades = new ArrayList<>();
     this.proximoId = 1;
   }
 
-  public static GerenciadorPropriedades getInstance() {
+  public static GerenciadorPropriedades getInstancia() {
     if (instancia == null) {
       instancia = new GerenciadorPropriedades();
     }
     return instancia;
   }
 
-  public void cadastrarPropriedade(Propriedade propriedade, Proprietario proprietario) {
+  public void cadastrarPropriedade(Propriedade propriedade, Usuario proprietario) {
     propriedade.setId(proximoId++);
     propriedade.setProprietario(proprietario);
     propriedades.add(propriedade);
@@ -33,6 +34,24 @@ public class GerenciadorPropriedades {
     return null;
   }
 
+  public void excluirPropriedade(int idPropriedade) {
+    Propriedade propriedadeParaExcluir = null;
+
+    for (Propriedade propriedade : propriedades) {
+      if (propriedade.getId() == idPropriedade) {
+        propriedadeParaExcluir = propriedade;
+        break;
+      }
+    }
+
+    if (propriedadeParaExcluir != null) {
+      propriedades.remove(propriedadeParaExcluir);
+      System.out.println("Propriedade excluída com sucesso!");
+    } else {
+      System.out.println("Propriedade não encontrada com o ID fornecido.");
+    }
+  }
+
   public static void exibirTodasPropriedades() {
     System.out.println("----- LISTA DE PROPRIEDADES -----");
     for (Propriedade propriedade : propriedades) {
@@ -45,7 +64,7 @@ public class GerenciadorPropriedades {
       System.out.println("---------------------------------");
     }
   }
-    
+
   public List<Propriedade> getPropriedadesPorProprietario(Proprietario proprietario) {
     List<Propriedade> propriedadesDoProprietario = new ArrayList<>();
     for (Propriedade propriedade : propriedades) {

@@ -60,20 +60,29 @@ public abstract class Usuario {
 
   public static Usuario buscarUsuario(String nome, String senha) {
     for (Usuario usuario : usuariosCadastrados) {
-        if (usuario.getNome().equalsIgnoreCase(nome) && usuario.getSenha().equals(senha)) {
-            return usuario;
-        }
+      if (usuario.getNome().equalsIgnoreCase(nome) && usuario.getSenha().equals(senha)) {
+        return usuario;
+      }
+    }
+    return null;
+  }
+
+  public static Usuario getUsuario(Usuario usuarioBusca) {
+    for (Usuario usuario : usuariosCadastrados) {
+      if (usuario.equals(usuarioBusca)) {
+        return usuario;
+      }
     }
     return null;
   }
 
   public static void excluirUsuario(String nome) {
     for (Usuario usuario : usuariosCadastrados) {
-        if (usuario.getNome().equals(nome)) {
-          usuariosCadastrados.remove(usuario);
-          System.out.println("Usuário removido com sucesso.");
-          return;
-        }
+      if (usuario.getNome().equals(nome)) {
+        usuariosCadastrados.remove(usuario);
+        System.out.println("Usuário removido com sucesso.");
+        return;
+      }
     }
     System.out.println("Usuário não encontrado.");
   }
@@ -83,6 +92,5 @@ public abstract class Usuario {
   }
 
   public abstract void exibirMenu();
+
 }
-
-
