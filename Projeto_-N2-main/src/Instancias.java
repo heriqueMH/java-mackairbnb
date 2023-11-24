@@ -75,7 +75,7 @@ public class Instancias {
 
     Avaliacao avaliacao1 = new Avaliacao(4, "Ótima estadia!");
     Avaliacao avaliacao2 = new Avaliacao(5, "Localização excelente!");
-    Avaliacao avaliacao3 = new Avaliacao(3); // Sem comentário
+    Avaliacao avaliacao3 = new Avaliacao(3);
     Avaliacao avaliacao4 = new Avaliacao(5, "Maravilhoso lugar!");
     Avaliacao avaliacao5 = new Avaliacao(2, "Limpeza deixou a desejar.");
     Avaliacao avaliacao6 = new Avaliacao(4, "Adorei o ambiente!");

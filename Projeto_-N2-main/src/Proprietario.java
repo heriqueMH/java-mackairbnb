@@ -13,8 +13,8 @@ public class Proprietario extends Usuario {
   }
 
   public void exibirPropriedades() {
-    MackAirbnb gerenciador = MackAirbnb.getInstancia();
-    List<Propriedade> minhasPropriedades = gerenciador.getPropriedadesPorProprietario(this);
+    MackAirbnb instancia = MackAirbnb.getInstancia();
+    List<Propriedade> minhasPropriedades = instancia.getPropriedadesPorProprietario(this);
 
     if (minhasPropriedades.isEmpty()) {
       System.out.println("Você não possui propriedades cadastradas.");
@@ -63,6 +63,50 @@ public class Proprietario extends Usuario {
     MackAirbnb.getInstancia().cadastrarPropriedade(propriedade, proprietario);
   }
 
+  public void verificarReservasDasPropriedades() {
+    MackAirbnb instancia = MackAirbnb.getInstancia();
+    List<Propriedade> propriedadesDoProprietario = instancia.getPropriedadesPorProprietario(this);
+
+    System.out.println("");
+    System.out.println("----- RESERVAS DAS PROPRIEDADES -----");
+    for (Propriedade propriedade : propriedadesDoProprietario) {
+      List<Reserva> reservasDaPropriedade = MackAirbnb.getReservasPorPropriedade(propriedade);
+
+      System.out.println("Propriedade: " + propriedade.getTitulo());
+      if (reservasDaPropriedade.isEmpty()) {
+        System.out.println("Não há reservas cadastradas para esta propriedade.");
+      } else {
+        for (Reserva reserva : reservasDaPropriedade) {
+          System.out.println("Proprietário da reserva : " + reserva.getNome());
+          System.out.println("Número da reserva: " + reserva.getReserva());
+          System.out.println("Status: " + (reserva.isConfirmacaoReserva() ? "Confirmada" : "Pendente"));
+          System.out.println("---------------------------------");
+        }
+      }
+    }
+  }
+
+  public void verAvaliacoesDasPropriedades() {
+    MackAirbnb instancia = MackAirbnb.getInstancia();
+    List<Propriedade> propriedadesDoProprietario = instancia.getPropriedadesPorProprietario(this);
+
+    System.out.println("");
+    System.out.println("----- AVALIAÇÕES DAS SUAS PROPRIEDADES -----");
+
+    for (Propriedade propriedade : propriedadesDoProprietario) {
+      System.out.println("Propriedade: " + propriedade.getTitulo());
+      List<Avaliacao> avaliacoes = propriedade.getAvaliacoes();
+      if (avaliacoes.isEmpty()) {
+        System.out.println("Ainda não há avaliações para esta propriedade.");
+      } else {
+        for (Avaliacao avaliacao : avaliacoes) {
+          System.out.println(avaliacao);
+        }
+      }
+      System.out.println("---------------------------------------------");
+    }
+  }
+
   public void excluirPropriedade() {
     System.out.println("----- EXCLUSÃO DE PROPRIEDADE -----");
     System.out.print("Digite o ID da propriedade a ser excluída: ");
@@ -77,10 +121,12 @@ public class Proprietario extends Usuario {
     do {
       System.out.println("");
       System.out.println("----- MENU DO PROPRIETÁRIO -----");
-      System.out.println("1. Consultar suas Propriedades");
-      System.out.println("2. Cadastrar nova Propriedade");
-      System.out.println("3. Excluir uma Propriedade");
-      System.out.println("4. Sair do programa");
+      System.out.println("1. Consultar suas propriedades");
+      System.out.println("2. Cadastrar nova propriedade");
+      System.out.println("3. Consultar reservas das suas propriedades");
+      System.out.println("4. Consultar avalaiações das suas propriedades");
+      System.out.println("5. Excluir uma propriedade");
+      System.out.println("6. Fazer logoff");
       System.out.print("Escolha uma opção: ");
       opcaoMenu = scanner.nextInt();
       scanner.nextLine();
@@ -107,16 +153,22 @@ public class Proprietario extends Usuario {
           cadastrarNovaPropriedade(Usuario.getUsuario(this), titulo, descricao, localizacao, capacidade, precoPorNoite);
           break;
         case 3:
-          excluirPropriedade();
+          verificarReservasDasPropriedades();
           break;
         case 4:
+          verAvaliacoesDasPropriedades();
+          break;
+        case 5:
+          excluirPropriedade();
+          break;
+        case 6:
           System.out.println("Saindo do programa...");
           break;
         default:
           System.out.println("Opção inválida.");
           break;
       }
-    } while (opcaoMenu != 4);
+    } while (opcaoMenu != 6);
   }
 
 }

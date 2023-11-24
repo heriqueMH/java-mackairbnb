@@ -7,6 +7,7 @@ public class Main {
         Menu menu = new Menu();
         menu.setScanner(sc);
         Hospede.setScanner(sc);
+        Proprietario.setScanner(sc);
         menu.exibirMenu();
         sc.close();
     }

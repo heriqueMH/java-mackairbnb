@@ -39,6 +39,10 @@ public class Reserva {
     return hospede;
   }
 
+  public String getNome() {
+    return hospede.getNome();
+  }
+
   public boolean isConfirmacaoReserva() {
     return confirmacaoReserva;
   }
@@ -61,15 +65,21 @@ public class Reserva {
 
   public void confirmarReserva(int numReserva) {
     if (this.getReserva() == numReserva) {
-      if (!this.isConfirmacaoReserva()) {
-        if (this.realizarPagamento()) {
-          this.confirmacaoReserva = true;
-          System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
+      Propriedade propriedade = this.getPropriedade();
+      if (propriedade != null && MackAirbnb.propriedadeExiste(propriedade.getId())) {
+        if (!this.isConfirmacaoReserva()) {
+          if (this.realizarPagamento()) {
+            this.confirmacaoReserva = true;
+            System.out.println("Pagemnto Realizado");
+            System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
+          } else {
+            System.out.println("Falha no pagamento. Reserva não confirmada.");
+          }
         } else {
-          System.out.println("Falha no pagamento. Reserva não confirmada.");
+          System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
         }
       } else {
-        System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
+        System.out.println("Esta propriedade não está mais disponível para reserva.");
       }
     }
   }

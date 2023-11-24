@@ -123,7 +123,7 @@ public class Hospede extends Usuario {
       if (reservaPendente) {
         System.out.println("Deseja confirmar alguma reserva pendente? (S/N)");
         String resposta = scanner.nextLine().toUpperCase();
-        if (resposta == "S") {
+        if (resposta.equals("S")) {
           System.out.print("Digite o número da reserva a ser confirmada: ");
           int numReserva = scanner.nextInt();
           confirmarReservaPendente(numReserva);
@@ -200,7 +200,7 @@ public class Hospede extends Usuario {
       System.out.println("2. Cadastrar Nova Reserva");
       System.out.println("3. Consultar Lista de Propriedades");
       System.out.println("4. Excluir Reserva");
-      System.out.println("5. Voltar para o Menu inicial");
+      System.out.println("5. Fazer logoff");
       System.out.print("Escolha uma opção: ");
       opcaoMenu = scanner.nextInt();
       scanner.nextLine();
