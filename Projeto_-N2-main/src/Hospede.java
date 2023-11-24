@@ -1,15 +1,11 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Hospede extends Usuario {
-  private List<Reserva> reservas;
   private Scanner scanner;
 
   public Hospede(String nome, String cpf, String email, String endereco, String senha) {
     super(nome, cpf, email, endereco, senha);
-    this.reservas = new ArrayList<>();
     scanner = new Scanner(System.in);
   }
 
@@ -59,7 +55,7 @@ public class Hospede extends Usuario {
       novaReserva.setDataCheckIn(checkIn);
       novaReserva.setDataCheckOut(checkOut);
 
-      reservas.add(novaReserva);
+      MackAirbnb.reservas.add(novaReserva);
       System.out.println("Reserva cadastrada com sucesso.");
     }
   }
@@ -70,14 +66,14 @@ public class Hospede extends Usuario {
     Reserva reservaParaExcluir = null;
 
     if (senha.equals(getSenha())) {
-      for (Reserva reserva : reservas) {
+      for (Reserva reserva : MackAirbnb.reservas) {
         if (reserva.getReserva() == numeroReserva) {
           reservaParaExcluir = reserva;
           break;
         }
       }
       if (reservaParaExcluir != null) {
-        reservas.remove(reservaParaExcluir);
+        MackAirbnb.reservas.remove(reservaParaExcluir);
         System.out.println("Reserva excluída com sucesso.");
       } else {
         System.out.println("Reserva não encontrada.");
@@ -88,7 +84,7 @@ public class Hospede extends Usuario {
   }
 
   public Reserva getReserva(int numeroReserva) {
-    for (Reserva reserva : reservas) {
+    for (Reserva reserva : MackAirbnb.reservas) {
       if (reserva.getReserva() == numeroReserva) {
         return reserva;
       }
@@ -97,12 +93,12 @@ public class Hospede extends Usuario {
   }
 
   public void consultarReservas() {
-    if (reservas.isEmpty()) {
+    if (MackAirbnb.reservas.isEmpty()) {
       System.out.println("Você não possui reservas.");
     } else {
       boolean reservaPendente = false;
       System.out.println("----- SUAS RESERVAS -----");
-      for (Reserva reserva : reservas) {
+      for (Reserva reserva : MackAirbnb.reservas) {
         System.out.println("Número da reserva: " + reserva.getReserva());
         System.out.println("Propriedade: " + reserva.getPropriedade().getTitulo());
         System.out.println("Data de Check-in: " + reserva.getDataCheckIn());
@@ -128,7 +124,7 @@ public class Hospede extends Usuario {
   }
 
   public void confirmarReservaPendente(int numReserva) {
-    for (Reserva reserva : reservas) {
+    for (Reserva reserva : MackAirbnb.reservas) {
       if (reserva.getReserva() == numReserva && !reserva.isConfirmacaoReserva()) {
         reserva.confirmarReserva(numReserva);
         return;

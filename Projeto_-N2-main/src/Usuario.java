@@ -1,13 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Usuario {
   private String nome;
   private String cpf;
   private String email;
   private String endereco;
   private String senha;
-  private static List<Usuario> usuariosCadastrados = new ArrayList<>();
 
   public Usuario(String nome, String cpf, String email, String endereco, String senha) {
     this.nome = nome;
@@ -54,12 +50,12 @@ public abstract class Usuario {
   }
 
   public static void cadastrarNovoUsuario(Usuario novoUsuario) {
-    usuariosCadastrados.add(novoUsuario);
+    MackAirbnb.userCadastrado.add(novoUsuario);
     System.out.println("Usuário cadastrado com sucesso.");
   }
 
   public static Usuario buscarUsuario(String nome, String senha) {
-    for (Usuario usuario : usuariosCadastrados) {
+    for (Usuario usuario : MackAirbnb.userCadastrado) {
       if (usuario.getNome().equalsIgnoreCase(nome) && usuario.getSenha().equals(senha)) {
         return usuario;
       }
@@ -68,7 +64,7 @@ public abstract class Usuario {
   }
 
   public static Usuario getUsuario(Usuario usuarioBusca) {
-    for (Usuario usuario : usuariosCadastrados) {
+    for (Usuario usuario : MackAirbnb.userCadastrado) {
       if (usuario.equals(usuarioBusca)) {
         return usuario;
       }
@@ -77,9 +73,9 @@ public abstract class Usuario {
   }
 
   public static void excluirUsuario(String nome) {
-    for (Usuario usuario : usuariosCadastrados) {
+    for (Usuario usuario : MackAirbnb.userCadastrado) {
       if (usuario.getNome().equals(nome)) {
-        usuariosCadastrados.remove(usuario);
+        MackAirbnb.userCadastrado.remove(usuario);
         System.out.println("Usuário removido com sucesso.");
         return;
       }
