@@ -194,40 +194,40 @@ public class Hospede extends Usuario {
   public void exibirMenu() {
     int opcaoMenu;
     do {
-        System.out.println("");
-        System.out.println("-------- MENU DO HÓSPEDE --------");
-        System.out.println("1. Consultar Reservas");
-        System.out.println("2. Cadastrar Nova Reserva");
-        System.out.println("3. Consultar Lista de Propriedades");
-        System.out.println("4. Excluir Reserva");
-        System.out.println("5. Voltar para o Menu inicial");
-        System.out.print("Escolha uma opção: ");
-        opcaoMenu = scanner.nextInt();
-        scanner.nextLine();
+      System.out.println("");
+      System.out.println("-------- MENU DO HÓSPEDE --------");
+      System.out.println("1. Consultar Reservas");
+      System.out.println("2. Cadastrar Nova Reserva");
+      System.out.println("3. Consultar Lista de Propriedades");
+      System.out.println("4. Excluir Reserva");
+      System.out.println("5. Voltar para o Menu inicial");
+      System.out.print("Escolha uma opção: ");
+      opcaoMenu = scanner.nextInt();
+      scanner.nextLine();
 
-        switch (opcaoMenu) {
-            case 1:
-                consultarReservas();
-                break;
-            case 2:
-                cadastrarNovaReserva();
-                break;
-            case 3:
-                MackAirbnb.exibirTodasPropriedades();
-                break;
-            case 4:
-                System.out.print("Digite o número da reserva a ser excluída: ");
-                int numReserva = scanner.nextInt();
-                scanner.nextLine();
-                excluirReserva(numReserva);
-                break;
-            case 5:
-                System.out.println("Saindo do programa...");
-                break;
-            default:
-                System.out.println("Opção inválida.");
-                break;
-        }
+      switch (opcaoMenu) {
+        case 1:
+          consultarReservas();
+          break;
+        case 2:
+          cadastrarNovaReserva();
+          break;
+        case 3:
+          MackAirbnb.exibirTodasPropriedades();
+          break;
+        case 4:
+          System.out.print("Digite o número da reserva a ser excluída: ");
+          int numReserva = scanner.nextInt();
+          scanner.nextLine();
+          excluirReserva(numReserva);
+          break;
+        case 5:
+          System.out.println("Saindo do programa...");
+          break;
+        default:
+          System.out.println("Opção inválida.");
+          break;
+      }
     } while (opcaoMenu != 5);
   }
 

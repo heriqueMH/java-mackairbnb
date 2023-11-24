@@ -42,27 +42,27 @@ public class Menu {
     boolean autenticado = false;
 
     while (!autenticado) {
-        System.out.print("Digite o nome do usuário: ");
-        String nome = scanner.nextLine();
-        System.out.print("Digite a senha do usuário: ");
-        String senha = scanner.nextLine();
+      System.out.print("Digite o nome do usuário: ");
+      String nome = scanner.nextLine();
+      System.out.print("Digite a senha do usuário: ");
+      String senha = scanner.nextLine();
 
-        usuarioAutenticado = Usuario.buscarUsuario(nome, senha);
+      usuarioAutenticado = Usuario.buscarUsuario(nome, senha);
 
-        if (usuarioAutenticado != null) {
-            autenticado = true;
-            System.out.println("Usuário autenticado! Bem-vindo, " + usuarioAutenticado.getNome() + ".");
-        } else {
-            System.out.println("Usuário ou senha incorretos. Deseja tentar novamente? (S/N)");
-            String resposta = scanner.nextLine().toUpperCase();
+      if (usuarioAutenticado != null) {
+        autenticado = true;
+        System.out.println("Usuário autenticado! Bem-vindo, " + usuarioAutenticado.getNome() + ".");
+      } else {
+        System.out.println("Usuário ou senha incorretos. Deseja tentar novamente? (S/N)");
+        String resposta = scanner.nextLine().toUpperCase();
 
-            if (!resposta.equals("S")) {
-                autenticado = true;
-            }
+        if (!resposta.equals("S")) {
+          autenticado = true;
         }
+      }
     }
     return usuarioAutenticado;
-}
+  }
 
   public void exibirSubMenuCadastro() throws Exception {
     System.out.println("");

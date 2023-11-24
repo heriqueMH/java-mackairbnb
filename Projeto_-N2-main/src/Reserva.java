@@ -23,7 +23,7 @@ public class Reserva {
     return numReserva;
   }
 
-  public void setId (int id){
+  public void setId(int id) {
     this.numReserva = id;
   }
 
@@ -61,16 +61,16 @@ public class Reserva {
 
   public void confirmarReserva(int numReserva) {
     if (this.getReserva() == numReserva) {
-        if (!this.isConfirmacaoReserva()) {
-            if (this.realizarPagamento()) {
-                this.confirmacaoReserva = true;
-                System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
-            } else {
-                System.out.println("Falha no pagamento. Reserva não confirmada.");
-            }
+      if (!this.isConfirmacaoReserva()) {
+        if (this.realizarPagamento()) {
+          this.confirmacaoReserva = true;
+          System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
         } else {
-            System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
+          System.out.println("Falha no pagamento. Reserva não confirmada.");
         }
+      } else {
+        System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
+      }
     }
   }
 
