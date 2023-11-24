@@ -36,7 +36,7 @@ public class Propriedade {
   }
 
   public Usuario getProprietario() {
-    return proprietario;
+    return this.proprietario;
   }
 
   public void receberAvaliacao(Avaliacao avaliacao) {

@@ -56,11 +56,14 @@ public class MackAirbnb {
     System.out.println("----- LISTA DE PROPRIEDADES -----");
     for (Propriedade propriedade : propriedades) {
       System.out.println("ID: " + propriedade.getId());
+      System.out.println("Dono do Imóvel: " + propriedade.getProprietario());
       System.out.println("Título: " + propriedade.getTitulo());
       System.out.println("Descrição: " + propriedade.getDescricao());
       System.out.println("Localização: " + propriedade.getLocalizacao());
       System.out.println("Capacidade: " + propriedade.getCapacidade());
       System.out.println("Preço por Noite: " + propriedade.getPrecoPorNoite());
+      System.out.println("Fotos da propriedade: " + propriedade.getFotos());
+      System.out.println("Avaliações: " + propriedade.getAvaliacoes());
       System.out.println("---------------------------------");
     }
   }

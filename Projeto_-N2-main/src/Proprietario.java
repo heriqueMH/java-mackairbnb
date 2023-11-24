@@ -21,6 +21,9 @@ public class Proprietario extends Usuario {
         System.out.println("ID: " + propriedade.getId());
         System.out.println("Título: " + propriedade.getTitulo());
         System.out.println("Descrição: " + propriedade.getDescricao());
+        System.out.println("Localização: " + propriedade.getLocalizacao());
+        System.out.println("Capacidade: " + propriedade.getCapacidade());
+        System.out.println("Preço por noite: " + propriedade.getPrecoPorNoite());
         System.out.println("------------------------------");
       }
     }
@@ -66,46 +69,50 @@ public class Proprietario extends Usuario {
 
   @Override
   public void exibirMenu() {
-    System.out.println("");
-    System.out.println("----- MENU DO PROPRIETÁRIO -----");
-    System.out.println("1. Consultar suas Propriedades");
-    System.out.println("2. Cadastrar nova Propriedade");
-    System.out.println("3. Excluir uma Propriedade");
-    System.out.println("4. Sair do programa");
-    System.out.print("Escolha uma opção: ");
-    int opcaoMenu = scanner.nextInt();
-    scanner.nextLine();
+    int opcaoMenu;
+    do {
+      System.out.println("");
+      System.out.println("----- MENU DO PROPRIETÁRIO -----");
+      System.out.println("1. Consultar suas Propriedades");
+      System.out.println("2. Cadastrar nova Propriedade");
+      System.out.println("3. Excluir uma Propriedade");
+      System.out.println("4. Sair do programa");
+      System.out.print("Escolha uma opção: ");
+      opcaoMenu = scanner.nextInt();
+      scanner.nextLine();
 
-    switch (opcaoMenu) {
-      case 1:
-        exibirPropriedades();
-        break;
-      case 2:
-        System.out.println("----- CADASTRO DE PROPRIEDADE -----");
-        System.out.print("Título da propriedade: ");
-        String titulo = scanner.nextLine();
-        System.out.print("Descrição da propriedade: ");
-        String descricao = scanner.nextLine();
-        System.out.print("Localização da propriedade: ");
-        String localizacao = scanner.nextLine();
-        System.out.print("Capacidade da propriedade: ");
-        int capacidade = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Preço por noite: ");
-        double precoPorNoite = scanner.nextDouble();
-        scanner.nextLine();
+      switch (opcaoMenu) {
+        case 1:
+          exibirPropriedades();
+          break;
+        case 2:
+          System.out.println("----- CADASTRO DE PROPRIEDADE -----");
+          System.out.print("Título da propriedade: ");
+          String titulo = scanner.nextLine();
+          System.out.print("Descrição da propriedade: ");
+          String descricao = scanner.nextLine();
+          System.out.print("Localização da propriedade: ");
+          String localizacao = scanner.nextLine();
+          System.out.print("Capacidade da propriedade: ");
+          int capacidade = scanner.nextInt();
+          scanner.nextLine();
+          System.out.print("Preço por noite: ");
+          double precoPorNoite = scanner.nextDouble();
+          scanner.nextLine();
 
-        cadastrarNovaPropriedade(Usuario.getUsuario(this), titulo, descricao, localizacao, capacidade, precoPorNoite);
-        break;
-      case 3:
-        excluirPropriedade();
-        break;
-      case 4:
-        System.out.println("Saindo do programa...");
-        break;
-      default:
-        System.out.println("Opção inválida.");
-        break;
-    }
+          cadastrarNovaPropriedade(Usuario.getUsuario(this), titulo, descricao, localizacao, capacidade, precoPorNoite);
+          break;
+        case 3:
+          excluirPropriedade();
+          break;
+        case 4:
+          System.out.println("Saindo do programa...");
+          break;
+        default:
+          System.out.println("Opção inválida.");
+          break;
+      }
+    } while (opcaoMenu != 4);
   }
+
 }
