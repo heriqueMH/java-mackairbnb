@@ -2,11 +2,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Proprietario extends Usuario {
-  private Scanner scanner;
+  private static Scanner scanner;
 
   public Proprietario(String nome, String cpf, String email, String endereco, String senha) {
     super(nome, cpf, email, endereco, senha);
-    this.scanner = new Scanner(System.in);
+  }
+
+  public static void setScanner(Scanner sc) {
+    scanner = sc;
   }
 
   public void exibirPropriedades() {
@@ -31,7 +34,7 @@ public class Proprietario extends Usuario {
   }
 
   public static void menuDeCadastro() {
-    Scanner scanner = new Scanner(System.in);
+    setScanner(scanner);
     System.out.print("Digite o nome do proprietário: ");
     String nome = scanner.nextLine();
     System.out.print("Digite a senha do proprietário: ");

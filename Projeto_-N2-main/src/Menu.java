@@ -4,7 +4,10 @@ public class Menu {
   private Scanner scanner;
 
   public Menu() {
-    this.scanner = new Scanner(System.in);
+  }
+
+  public void setScanner(Scanner sc) {
+    this.scanner = sc;
   }
 
   public void exibirMenu() throws Exception {

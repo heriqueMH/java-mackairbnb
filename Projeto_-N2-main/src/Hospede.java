@@ -3,11 +3,14 @@ import java.util.Scanner;
 
 public class Hospede extends Usuario {
   private int numeroReserva;
-  private Scanner scanner;
+  private static Scanner scanner;
 
   public Hospede(String nome, String cpf, String email, String endereco, String senha) {
     super(nome, cpf, email, endereco, senha);
-    scanner = new Scanner(System.in);
+  }
+
+  public static void setScanner(Scanner sc) {
+    scanner = sc;
   }
 
   public void cadastrarNovaReserva() {
@@ -166,7 +169,7 @@ public class Hospede extends Usuario {
   }
 
   public static void menuDeCadastro() {
-    Scanner scanner = new Scanner(System.in);
+    setScanner(scanner);
     System.out.print("Digite o nome do hospede: ");
     String nome = scanner.nextLine();
     System.out.print("Digite a senha do hospede: ");
@@ -199,7 +202,6 @@ public class Hospede extends Usuario {
         System.out.println("4. Excluir Reserva");
         System.out.println("5. Voltar para o Menu inicial");
         System.out.print("Escolha uma opção: ");
-
         opcaoMenu = scanner.nextInt();
         scanner.nextLine();
 

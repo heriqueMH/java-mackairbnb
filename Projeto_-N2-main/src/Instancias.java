@@ -131,5 +131,6 @@ public class Instancias {
     propriedade5.receberAvaliacao(avaliacao13);
     propriedade5.receberAvaliacao(avaliacao14);
     propriedade5.receberAvaliacao(avaliacao15);
+    propriedade1.receberAvaliacao(avaliacao16);
   }
 }
