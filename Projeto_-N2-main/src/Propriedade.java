@@ -35,8 +35,8 @@ public class Propriedade {
     this.proprietario = proprietario;
   }
 
-  public Usuario getProprietario() {
-    return this.proprietario;
+  public String getProprietario() {
+    return proprietario.getNome();
   }
 
   public void receberAvaliacao(Avaliacao avaliacao) {
@@ -98,7 +98,7 @@ public class Propriedade {
 
   public List<Avaliacao> getAvaliacoes() {
     return this.avaliacoes;
-  }
+}
 
   public void setAvaliacoes(List<Avaliacao> avaliacoes) {
     this.avaliacoes = avaliacoes;

@@ -26,4 +26,12 @@ public class Avaliacao {
   public void setComentario(String comentario) {
     this.comentario = comentario;
   }
+
+  public String toString() {
+    if (comentario != null) {
+      return "Nota: " + this.pontuacao + ", Comentário: " + this.comentario;
+    } else {
+      return "Nota: " + this.pontuacao;
+    }
+  }
 }

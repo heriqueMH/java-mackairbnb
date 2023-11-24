@@ -63,15 +63,18 @@ public class MackAirbnb {
       System.out.println("Capacidade: " + propriedade.getCapacidade());
       System.out.println("Preço por Noite: " + propriedade.getPrecoPorNoite());
       System.out.println("Fotos da propriedade: " + propriedade.getFotos());
-      System.out.println("Avaliações: " + propriedade.getAvaliacoes());
-      System.out.println("---------------------------------");
+      System.out.println("Avaliações:");
+      for (Avaliacao avaliacao : propriedade.getAvaliacoes()) {
+          System.out.println(avaliacao);
+      }
+      System.out.println("------------------------------------");
     }
   }
 
   public List<Propriedade> getPropriedadesPorProprietario(Proprietario proprietario) {
     List<Propriedade> propriedadesDoProprietario = new ArrayList<>();
     for (Propriedade propriedade : propriedades) {
-      if (proprietario.equals(propriedade.getProprietario())) {
+      if (proprietario.getNome().equals(propriedade.getProprietario())) {
         propriedadesDoProprietario.add(propriedade);
       }
     }
