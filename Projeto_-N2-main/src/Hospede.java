@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Hospede extends Usuario {
+  private int numeroReserva;
   private Scanner scanner;
 
   public Hospede(String nome, String cpf, String email, String endereco, String senha) {
@@ -54,6 +55,7 @@ public class Hospede extends Usuario {
       LocalDate checkOut = LocalDate.parse(checkOutStr);
 
       Reserva novaReserva = new Reserva(propriedadeEscolhida, this);
+      novaReserva.setId(numeroReserva++);
       novaReserva.setDataCheckIn(checkIn);
       novaReserva.setDataCheckOut(checkOut);
 
@@ -99,6 +101,7 @@ public class Hospede extends Usuario {
       System.out.println("Você não possui reservas.");
     } else {
       boolean reservaPendente = false;
+      System.out.println("");
       System.out.println("----- SUAS RESERVAS -----");
       for (Reserva reserva : MackAirbnb.reservas) {
         System.out.println("Número da reserva: " + reserva.getReserva());
