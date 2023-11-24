@@ -16,6 +16,7 @@ public class Proprietario extends Usuario {
     if (minhasPropriedades.isEmpty()) {
       System.out.println("Você não possui propriedades cadastradas.");
     } else {
+      System.out.println("");
       System.out.println("----- SUAS PROPRIEDADES -----");
       for (Propriedade propriedade : minhasPropriedades) {
         System.out.println("ID: " + propriedade.getId());

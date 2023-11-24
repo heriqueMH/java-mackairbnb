@@ -65,6 +65,7 @@ public class Hospede extends Usuario {
   }
 
   public void excluirReserva(int numeroReserva) {
+    System.out.println("");
     System.out.print("Digite a senha para confirmar a exclusão da reserva: ");
     String senha = scanner.nextLine();
     Reserva reservaParaExcluir = null;
@@ -191,12 +192,12 @@ public class Hospede extends Usuario {
     int opcaoMenu;
     do {
         System.out.println("");
-        System.out.println("----- MENU DO HÓSPEDE -----");
+        System.out.println("-------- MENU DO HÓSPEDE --------");
         System.out.println("1. Consultar Reservas");
         System.out.println("2. Cadastrar Nova Reserva");
         System.out.println("3. Consultar Lista de Propriedades");
         System.out.println("4. Excluir Reserva");
-        System.out.println("5. Sair do programa");
+        System.out.println("5. Voltar para o Menu inicial");
         System.out.print("Escolha uma opção: ");
 
         opcaoMenu = scanner.nextInt();
@@ -215,6 +216,7 @@ public class Hospede extends Usuario {
             case 4:
                 System.out.print("Digite o número da reserva a ser excluída: ");
                 int numReserva = scanner.nextInt();
+                scanner.nextLine();
                 excluirReserva(numReserva);
                 break;
             case 5:
