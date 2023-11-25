@@ -35,6 +35,7 @@ public class Proprietario extends Usuario {
 
   public static void menuDeCadastro() {
     setScanner(scanner);
+    System.out.println("");
     System.out.print("Digite o nome do proprietário: ");
     String nome = scanner.nextLine();
     System.out.print("Digite a senha do proprietário: ");
@@ -97,7 +98,7 @@ public class Proprietario extends Usuario {
       System.out.println("Propriedade: " + propriedade.getTitulo());
       List<Avaliacao> avaliacoes = propriedade.getAvaliacoes();
       if (avaliacoes.isEmpty()) {
-        System.out.println("Ainda não há avaliações para esta propriedade.");
+        System.out.println("!!!!! Ainda não há avaliações para esta propriedade. !!!!!");
       } else {
         for (Avaliacao avaliacao : avaliacoes) {
           System.out.println(avaliacao);
@@ -136,6 +137,7 @@ public class Proprietario extends Usuario {
           exibirPropriedades();
           break;
         case 2:
+          System.out.println("");
           System.out.println("----- CADASTRO DE PROPRIEDADE -----");
           System.out.print("Título da propriedade: ");
           String titulo = scanner.nextLine();
@@ -162,7 +164,8 @@ public class Proprietario extends Usuario {
           excluirPropriedade();
           break;
         case 6:
-          System.out.println("Saindo do programa...");
+          System.out.println("");
+          System.out.println("!!!!! Saindo do programa... !!!!!");
           break;
         default:
           System.out.println("Opção inválida.");

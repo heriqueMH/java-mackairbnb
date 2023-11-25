@@ -51,7 +51,8 @@ public abstract class Usuario {
 
   public static void cadastrarNovoUsuario(Usuario novoUsuario) {
     MackAirbnb.userCadastrado.add(novoUsuario);
-    System.out.println("Usuário cadastrado com sucesso.");
+    System.out.println("");
+    System.out.println("!!!!! Usuário cadastrado com sucesso. !!!!!");
   }
 
   public static Usuario buscarUsuario(String nome, String senha) {
@@ -76,11 +77,13 @@ public abstract class Usuario {
     for (Usuario usuario : MackAirbnb.userCadastrado) {
       if (usuario.getNome().equals(nome)) {
         MackAirbnb.userCadastrado.remove(usuario);
-        System.out.println("Usuário removido com sucesso.");
+        System.out.println("");
+        System.out.println("!!!!! Usuário removido com sucesso. !!!!!");
         return;
       }
     }
-    System.out.println("Usuário não encontrado.");
+    System.out.println("");
+    System.out.println("!!!!! Usuário não encontrado. !!!!!");
   }
 
   public boolean senhaValida(String senha) {

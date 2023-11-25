@@ -66,13 +66,15 @@ public class Hospede extends Usuario {
       novaReserva.setDataCheckOut(checkOut);
 
       MackAirbnb.reservas.add(novaReserva);
-      System.out.println("Reserva cadastrada com sucesso.");
+      System.out.println("");
+      System.out.println("!!!!! Reserva cadastrada com sucesso. !!!!!");
     }
   }
 
   public void excluirReserva(int numeroReserva) {
     System.out.println("");
     System.out.print("Digite a senha para confirmar a exclusão da reserva: ");
+    System.out.println("");
     String senha = scanner.nextLine();
     Reserva reservaParaExcluir = null;
 
@@ -130,6 +132,8 @@ public class Hospede extends Usuario {
           System.out.print("Digite o número da reserva a ser confirmada: ");
           int numReserva = scanner.nextInt();
           confirmarReservaPendente(numReserva);
+        }else{
+          exibirMenu();
         }
       }
     }
@@ -164,10 +168,10 @@ public class Hospede extends Usuario {
         }
         reserva.getPropriedade().receberAvaliacao(avaliacao);
       } else {
-        System.out.println("Avaliação disponível somente após o término da estadia.");
+        System.out.println("!!!!! Avaliação disponível somente após o término da estadia. !!!!!");
       }
     } else {
-      System.out.println("Reserva não encontrada.");
+      System.out.println("!!!!! Reserva não encontrada. !!!!!");
     }
   }
 
@@ -225,7 +229,7 @@ public class Hospede extends Usuario {
           excluirReserva(numReserva);
           break;
         case 5:
-          System.out.println("Saindo do programa...");
+          System.out.println("!!!!! Saindo do programa... !!!!!");
           break;
         default:
           System.out.println("Opção inválida.");

@@ -51,8 +51,10 @@ public class Menu {
 
       if (usuarioAutenticado != null) {
         autenticado = true;
+        System.out.println("");
         System.out.println("Usuário autenticado! Bem-vindo, " + usuarioAutenticado.getNome() + ".");
       } else {
+        System.out.println("");
         System.out.println("Usuário ou senha incorretos. Deseja tentar novamente? (S/N)");
         String resposta = scanner.nextLine().toUpperCase();
 
