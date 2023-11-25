@@ -90,7 +90,6 @@ public class Reserva {
 
   public void realizarCheckout(LocalDate dataSaidaReal) {
     this.dataSaidaReal = dataSaidaReal;
-
   }
 
   public LocalDate getDataSaidaReal() {

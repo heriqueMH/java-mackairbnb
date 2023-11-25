@@ -91,15 +91,6 @@ public class MackAirbnb {
     return reservasDaPropriedade;
   }
 
-  public Reserva getReserva(int numeroReserva) {
-    for (Reserva reserva : reservas) {
-      if (reserva.getReserva() == numeroReserva) {
-        return reserva;
-      }
-    }
-    return null;
-  }
-
   public static boolean propriedadeExiste(int id) {
     for (Propriedade propriedade : propriedades) {
       if (propriedade.getId() == id) {

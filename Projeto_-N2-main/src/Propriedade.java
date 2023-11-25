@@ -44,8 +44,7 @@ public class Propriedade {
   }
 
   public double calcularCustoTotal(int quantidadeDias) { // ainda precisa ser ajudatado (o dia da saida do usuário pode
-                                                         // ser diferente do estipulado na Reserva)
-    return quantidadeDias * precoPorNoite;
+    return quantidadeDias * precoPorNoite; // ser diferente do estipulado na Reserva)
   }
 
   public String getTitulo() {
@@ -98,7 +97,7 @@ public class Propriedade {
 
   public List<Avaliacao> getAvaliacoes() {
     return this.avaliacoes;
-}
+  }
 
   public void setAvaliacoes(List<Avaliacao> avaliacoes) {
     this.avaliacoes = avaliacoes;

@@ -14,36 +14,39 @@ public class Hospede extends Usuario {
   }
 
   public void cadastrarNovaReserva() {
-    System.out.println("----- CADASTRAR NOVA RESERVA -----");
-    System.out.println("1. Buscar Propriedade");
-    System.out.println("2. Lista Propriedades");
-    System.out.println("3. Sair do Programa");
-    System.out.print("Escolha uma opção: ");
-    int opcaoSubMenu = scanner.nextInt();
-    scanner.nextLine();
+    int opcaoSubMenu;
+    do {
+      System.out.println("----- CADASTRAR NOVA RESERVA -----");
+      System.out.println("1. Lista Propriedades");
+      System.out.println("2. Selecionar propriedade");
+      System.out.println("3. Sair do Programa");
+      System.out.print("Escolha uma opção: ");
+      opcaoSubMenu = scanner.nextInt();
+      scanner.nextLine();
 
-    switch (opcaoSubMenu) {
-      case 1:
-        System.out.println("Digite o Id da propriedade.");
-        int idEscolhido = scanner.nextInt();
-        setPropriedade(idEscolhido);
-        exibirMenu();
-        break;
-      case 2:
-        MackAirbnb.exibirTodasPropriedades();
-        System.out.println("");
-        System.out.println("Digite o ID da propriedade desejada");
-        int id = scanner.nextInt();
-        setPropriedade(id);
-        exibirMenu();
-        break;
-      case 3:
-        break;
-      default:
-        System.out.println("Opção inválida.");
-        break;
+      switch (opcaoSubMenu) {
+        case 1:
+          MackAirbnb.exibirTodasPropriedades();
+          System.out.println("");
+          System.out.println("Digite o ID da propriedade desejada");
+          int id = scanner.nextInt();
+          setPropriedade(id);
+          exibirMenu();
+          break;
+        case 2:
+          System.out.println("Digite o Id da propriedade.");
+          int idEscolhido = scanner.nextInt();
+          setPropriedade(idEscolhido);
+          exibirMenu();
+          break;
+        case 3:
+          break;
+        default:
+          System.out.println("Opção inválida.");
+          break;
 
-    }
+      }
+    } while (opcaoSubMenu != 3);
   }
 
   public void setPropriedade(int id) {
@@ -196,9 +199,9 @@ public class Hospede extends Usuario {
     do {
       System.out.println("");
       System.out.println("-------- MENU DO HÓSPEDE --------");
-      System.out.println("1. Consultar Reservas");
-      System.out.println("2. Cadastrar Nova Reserva");
-      System.out.println("3. Consultar Lista de Propriedades");
+      System.out.println("1. Consultar Lista de Propriedades");
+      System.out.println("2. Consultar Reservas");
+      System.out.println("3. Cadastrar Nova Reserva");
       System.out.println("4. Excluir Reserva");
       System.out.println("5. Fazer logoff");
       System.out.print("Escolha uma opção: ");
@@ -207,13 +210,13 @@ public class Hospede extends Usuario {
 
       switch (opcaoMenu) {
         case 1:
-          consultarReservas();
+          MackAirbnb.exibirTodasPropriedades();
           break;
         case 2:
-          cadastrarNovaReserva();
+          consultarReservas();
           break;
         case 3:
-          MackAirbnb.exibirTodasPropriedades();
+          cadastrarNovaReserva();
           break;
         case 4:
           System.out.print("Digite o número da reserva a ser excluída: ");
