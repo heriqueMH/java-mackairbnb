@@ -63,15 +63,38 @@ public class Reserva {
     this.dataCheckOut = dataCheckOut;
   }
 
+  public boolean dataDisponivel() {
+    for (Reserva reserva : MackAirbnb.reservas) {
+      if (reserva.getPropriedade().getId() == this.getPropriedade().getId()) {
+        if (reserva.getDataCheckIn().isEqual(this.getDataCheckIn()) || reserva.getDataCheckOut().isEqual(this.getDataCheckOut())) {
+          return false;
+        }
+        if (reserva.getDataCheckIn().isAfter(this.getDataCheckIn()) && reserva.getDataCheckIn().isBefore(this.getDataCheckOut())) {
+          return false;
+        }
+        if (reserva.getDataCheckOut().isAfter(this.getDataCheckIn()) && reserva.getDataCheckOut().isBefore(this.getDataCheckOut())) {
+          return false;
+        }
+        return true;
+      }
+    }
+    return true;
+  }
+
   public void confirmarReserva(int numReserva) {
     if (this.getReserva() == numReserva) {
       Propriedade propriedade = this.getPropriedade();
       if (propriedade != null && MackAirbnb.propriedadeExiste(propriedade.getId())) {
         if (!this.isConfirmacaoReserva()) {
           if (this.realizarPagamento()) {
-            this.confirmacaoReserva = true;
-            System.out.println("Pagemnto Realizado");
-            System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
+            if (this.dataDisponivel()) {
+              this.confirmacaoReserva = true;
+              System.out.println("Pagemnto Realizado");
+              System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
+            }
+            else {
+              System.out.println("A reserva " + numReserva + " não pode ser confirmada pois a propriedade não está disponível para as datas solicitadas.");
+            }
           } else {
             System.out.println("Falha no pagamento. Reserva não confirmada.");
           }
