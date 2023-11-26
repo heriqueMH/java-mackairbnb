@@ -4,8 +4,8 @@ import java.util.List;
 public class MackAirbnb {
   public static MackAirbnb instancia = null;
   public static List<Usuario> userCadastrado = new ArrayList<>();
-  public static List<Propriedade> propriedades = new ArrayList<>();;
-  public static List<Reserva> reservas = new ArrayList<>();;
+  public static List<Propriedade> propriedades = new ArrayList<>();
+  public static List<Reserva> reservas = new ArrayList<>();
   public int proximoId = 1;
 
   public MackAirbnb() {

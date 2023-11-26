@@ -81,6 +81,10 @@ public class Hospede extends Usuario {
     if (senha.equals(getSenha())) {
       for (Reserva reserva : MackAirbnb.reservas) {
         if (reserva.getReserva() == numeroReserva) {
+          if (reserva.getHospede() != this) {
+            System.out.println("Você não pode excluir uma reserva que não é sua.");
+            return;
+          }
           reservaParaExcluir = reserva;
           break;
         }
