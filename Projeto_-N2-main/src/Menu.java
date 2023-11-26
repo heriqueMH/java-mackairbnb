@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
 public class Menu {
-  private Scanner scanner;
+  private static Scanner scanner;
 
   public Menu() {
   }
 
-  public void setScanner(Scanner sc) {
-    this.scanner = sc;
+  public static void setScanner(Scanner sc) {
+    scanner = sc;
   }
 
   public void exibirMenu() throws Exception {
@@ -37,7 +37,7 @@ public class Menu {
     } while (opcaoMenu != 4);
   }
 
-  public Usuario autenticarUsuario() {
+  public static Usuario autenticarUsuario() {
     Usuario usuarioAutenticado = null;
     boolean autenticado = false;
 
@@ -94,8 +94,7 @@ public class Menu {
   }
 
   private void excluirUsuario() {
-    System.out.print("Digite o nome do usuário a ser excluído: ");
-    String nome = scanner.next();
-    Usuario.excluirUsuario(nome);
+    Usuario user = autenticarUsuario();
+    Usuario.excluirUsuario(user.getNome());
   }
 }

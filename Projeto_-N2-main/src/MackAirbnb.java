@@ -35,26 +35,6 @@ public class MackAirbnb {
     return null;
   }
 
-  public void excluirPropriedade(int idPropriedade) {
-    Propriedade propriedadeParaExcluir = null;
-
-    for (Propriedade propriedade : propriedades) {
-      if (propriedade.getId() == idPropriedade) {
-        propriedadeParaExcluir = propriedade;
-        break;
-      }
-    }
-
-    if (propriedadeParaExcluir != null) {
-      propriedades.remove(propriedadeParaExcluir);
-      System.out.println("");
-      System.out.println("!!!!! Propriedade excluída com sucesso! !!!!!");
-    } else {
-      System.out.println("");
-      System.out.println("Propriedade não encontrada com o ID fornecido.");
-    }
-  }
-
   public static void exibirTodasPropriedades() {
     System.out.println("----- LISTA DE PROPRIEDADES -----");
     for (Propriedade propriedade : propriedades) {

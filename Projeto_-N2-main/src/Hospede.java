@@ -71,7 +71,10 @@ public class Hospede extends Usuario {
     }
   }
 
-  public void excluirReserva(int numeroReserva) {
+  public void excluirReserva() {
+    System.out.print("Digite o número da reserva a ser excluída: ");
+    int numReserva = scanner.nextInt();
+    scanner.nextLine();
     System.out.println("");
     System.out.print("Digite a senha para confirmar a exclusão da reserva: ");
     System.out.println("");
@@ -80,7 +83,7 @@ public class Hospede extends Usuario {
 
     if (senha.equals(getSenha())) {
       for (Reserva reserva : MackAirbnb.reservas) {
-        if (reserva.getReserva() == numeroReserva) {
+        if (reserva.getReserva() == numReserva) {
           reservaParaExcluir = reserva;
           break;
         }
@@ -132,7 +135,7 @@ public class Hospede extends Usuario {
           System.out.print("Digite o número da reserva a ser confirmada: ");
           int numReserva = scanner.nextInt();
           confirmarReservaPendente(numReserva);
-        }else{
+        } else {
           exibirMenu();
         }
       }
@@ -223,10 +226,7 @@ public class Hospede extends Usuario {
           cadastrarNovaReserva();
           break;
         case 4:
-          System.out.print("Digite o número da reserva a ser excluída: ");
-          int numReserva = scanner.nextInt();
-          scanner.nextLine();
-          excluirReserva(numReserva);
+          excluirReserva();
           break;
         case 5:
           System.out.println("!!!!! Saindo do programa... !!!!!");

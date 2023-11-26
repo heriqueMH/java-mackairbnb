@@ -109,11 +109,32 @@ public class Proprietario extends Usuario {
   }
 
   public void excluirPropriedade() {
+    System.out.println("");
+    System.out.print("Digite a senha para confirmar a exclusão da reserva: ");
+    System.out.println("");
+    String senha = scanner.nextLine();
     System.out.println("----- EXCLUSÃO DE PROPRIEDADE -----");
     System.out.print("Digite o ID da propriedade a ser excluída: ");
     int idPropriedade = scanner.nextInt();
     scanner.nextLine();
-    MackAirbnb.getInstancia().excluirPropriedade(idPropriedade);
+    Propriedade propriedadeParaExcluir = null;
+
+    if (senha.equals(getSenha())) {
+      for (Propriedade propriedade : MackAirbnb.propriedades) {
+        if (propriedade.getId() == idPropriedade) {
+          propriedadeParaExcluir = propriedade;
+          break;
+        }
+      }
+      if (propriedadeParaExcluir != null) {
+        MackAirbnb.propriedades.remove(idPropriedade);
+        System.out.println("Reserva excluída com sucesso.");
+      } else {
+        System.out.println("Reserva não encontrada.");
+      }
+    } else {
+      System.out.println("Senha incorreta. A exclusão da reserva não foi realizada.");
+    }
   }
 
   @Override

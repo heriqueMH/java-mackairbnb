@@ -5,7 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Instancias instancia = new Instancias();
         Menu menu = new Menu();
-        menu.setScanner(sc);
+        Menu.setScanner(sc);
         Hospede.setScanner(sc);
         Proprietario.setScanner(sc);
         menu.exibirMenu();
