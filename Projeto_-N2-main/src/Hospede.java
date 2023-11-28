@@ -83,7 +83,7 @@ public class Hospede extends Usuario {
 
     if (senha.equals(getSenha())) {
       for (Reserva reserva : MackAirbnb.reservas) {
-        if (reserva.getReserva() == numReserva) {
+        if (reserva.getReserva() == numeroReserva) {
           reservaParaExcluir = reserva;
           break;
         }
