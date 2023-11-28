@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Hospede extends Usuario {
@@ -70,12 +70,13 @@ public class Hospede extends Usuario {
       System.out.println("");
       System.out.println("!!!!! Reserva cadastrada com sucesso. !!!!!");
       System.out.println("");
-      System.out.println("Deseja confirmar sua reserva ? (S/N)");
-      System.out.println("");
-      Period periodo = Period.between(checkIn, checkOut);
-      int diferencaDias = periodo.getDays();
+      long periodo = ChronoUnit.DAYS.between(checkIn, checkOut);
+      int diferencaDias = (int)periodo;
       Propriedade propriedade = novaReserva.getPropriedade();
       System.out.println("O valor previsto da reserva é de: " + propriedade.calcularCustoTotal(diferencaDias));
+      System.out.println("");
+      System.out.println("Deseja confirmar sua reserva ? (S/N)");
+      System.out.println("");
       String resposta = scanner.next().toUpperCase();
         if (resposta.equals("S")) {
           novaReserva.confirmarReserva(novaReserva.getReserva());
