@@ -103,11 +103,14 @@ public class Hospede extends Usuario {
       }
       if (reservaParaExcluir != null) {
         MackAirbnb.reservas.remove(reservaParaExcluir);
-        System.out.println("Reserva excluída com sucesso.");
+        System.out.println("");
+        System.out.println("!!!!! Reserva excluída com sucesso. !!!!!");
       } else {
+        System.out.println("");
         System.out.println("Reserva não encontrada.");
       }
     } else {
+      System.out.println("");
       System.out.println("Senha incorreta. A exclusão da reserva não foi realizada.");
     }
   }

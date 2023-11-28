@@ -25,7 +25,12 @@ public class Menu {
       switch (opcaoMenu) {
         case 1:
           Usuario user = autenticarUsuario();
-          user.exibirMenu();
+          if (user == null) {
+            System.out.println("");
+            System.out.println("!!!!! Falha na autenticação. !!!!!");
+          } else {
+            user.exibirMenu();
+          }
           break;
         case 2:
           exibirSubMenuCadastro();
@@ -95,6 +100,11 @@ public class Menu {
 
   private void excluirUsuario() {
     Usuario user = autenticarUsuario();
-    Usuario.excluirUsuario(user.getNome());
+    if (user == null) {
+      System.out.println("");
+      System.out.println("!!!!! Falha na autenticação. !!!!!");
+    } else {
+      Usuario.excluirUsuario(user.getNome());
+    }
   }
 }
