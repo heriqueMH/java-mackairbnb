@@ -21,7 +21,7 @@ public class Hospede extends Usuario {
       System.out.println("----- CADASTRAR NOVA RESERVA -----");
       System.out.println("1. Lista Propriedades");
       System.out.println("2. Selecionar propriedade");
-      System.out.println("3. Sair do Programa");
+      System.out.println("3. Voltar para o menu inicial");
       System.out.print("Escolha uma opção: ");
       opcaoSubMenu = scanner.nextInt();
       scanner.nextLine();
@@ -70,17 +70,18 @@ public class Hospede extends Usuario {
       System.out.println("");
       System.out.println("!!!!! Reserva cadastrada com sucesso. !!!!!");
       System.out.println("");
+
       long periodo = ChronoUnit.DAYS.between(checkIn, checkOut);
-      int diferencaDias = (int)periodo;
+      int diferencaDias = (int) periodo;
       Propriedade propriedade = novaReserva.getPropriedade();
       System.out.println("O valor previsto da reserva é de: " + propriedade.calcularCustoTotal(diferencaDias));
       System.out.println("");
+
       System.out.println("Deseja confirmar sua reserva ? (S/N)");
-      System.out.println("");
       String resposta = scanner.next().toUpperCase();
-        if (resposta.equals("S")) {
-          novaReserva.confirmarReserva(novaReserva.getReserva());
-        }
+      if (resposta.equals("S")) {
+        novaReserva.confirmarReserva(novaReserva.getReserva());
+      }
     }
   }
 
@@ -124,7 +125,7 @@ public class Hospede extends Usuario {
     return null;
   }
 
-  public void consultarReservas() {
+  public void consultarReservas(Hospede hospede) {
     if (MackAirbnb.reservas.isEmpty()) {
       System.out.println("Você não possui reservas.");
     } else {
@@ -132,15 +133,17 @@ public class Hospede extends Usuario {
       System.out.println("");
       System.out.println("----- SUAS RESERVAS -----");
       for (Reserva reserva : MackAirbnb.reservas) {
-        System.out.println("Número da reserva: " + reserva.getReserva());
-        System.out.println("Propriedade: " + reserva.getPropriedade().getTitulo());
-        System.out.println("Data de Check-in: " + reserva.getDataCheckIn());
-        System.out.println("Data de Check-out: " + reserva.getDataCheckOut());
-        System.out.println("Confirmação de Reserva: " + (reserva.isConfirmacaoReserva() ? "Confirmada" : "Pendente"));
-        System.out.println("---------------------------------");
+        if (reserva.getHospede().equals(hospede)) {
+          System.out.println("Número da reserva: " + reserva.getReserva());
+          System.out.println("Propriedade: " + reserva.getPropriedade().getTitulo());
+          System.out.println("Data de Check-in: " + reserva.getDataCheckIn());
+          System.out.println("Data de Check-out: " + reserva.getDataCheckOut());
+          System.out.println("Confirmação de Reserva: " + (reserva.isConfirmacaoReserva() ? "Confirmada" : "Pendente"));
+          System.out.println("---------------------------------");
 
-        if (!reserva.isConfirmacaoReserva()) {
-          reservaPendente = true;
+          if (!reserva.isConfirmacaoReserva()) {
+            reservaPendente = true;
+          }
         }
       }
 
@@ -152,18 +155,19 @@ public class Hospede extends Usuario {
           int numReserva = scanner.nextInt();
           confirmarReservaPendente(numReserva);
         }
+      } else {
+        System.out.println("Todas as suas reservas estão confirmadas.");
       }
     }
   }
 
   public void confirmarReservaPendente(int numReserva) {
     for (Reserva reserva : MackAirbnb.reservas) {
-      if (reserva.getReserva() == numReserva && !reserva.isConfirmacaoReserva()) {
+      if (reserva.getReserva() == numReserva) {
         reserva.confirmarReserva(numReserva);
         return;
       }
     }
-    System.out.println("Reserva não encontrada ou já confirmada.");
   }
 
   public void avaliarPropriedade(int idReserva, Avaliacao avaliacao) {
@@ -234,7 +238,7 @@ public class Hospede extends Usuario {
           MackAirbnb.exibirTodasPropriedades();
           break;
         case 2:
-          consultarReservas();
+          consultarReservas(this);
           break;
         case 3:
           cadastrarNovaReserva();

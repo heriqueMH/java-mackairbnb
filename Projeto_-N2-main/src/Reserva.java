@@ -63,46 +63,44 @@ public class Reserva {
 
   public boolean dataDisponivel() {
     for (Reserva reserva : MackAirbnb.reservas) {
-      if (reserva.getPropriedade().getId() == this.getPropriedade().getId()) {
-        if (reserva.getDataCheckIn().isEqual(this.getDataCheckIn()) || reserva.getDataCheckOut().isEqual(this.getDataCheckOut())) {
+      if (reserva != this && reserva.isConfirmacaoReserva() && reserva.getPropriedade().equals(this.getPropriedade())) {
+        if (reserva.getDataCheckOut().isBefore(this.getDataCheckIn()) ||
+            reserva.getDataCheckIn().isAfter(this.getDataCheckOut())) {
+          continue;
+        } else {
           return false;
         }
-        if (reserva.getDataCheckIn().isAfter(this.getDataCheckIn()) && reserva.getDataCheckIn().isBefore(this.getDataCheckOut())) {
-          return false;
-        }
-        if (reserva.getDataCheckOut().isAfter(this.getDataCheckIn()) && reserva.getDataCheckOut().isBefore(this.getDataCheckOut())) {
-          return false;
-        }
-        return true;
       }
     }
     return true;
   }
 
-  public void confirmarReserva(int numReserva) {
-    if (this.getReserva() == numReserva) {
-      Propriedade propriedade = this.getPropriedade();
-      if (propriedade != null && MackAirbnb.propriedadeExiste(propriedade.getId())) {
-        if (!this.isConfirmacaoReserva()) {
-          if (this.realizarPagamento()) {
-            if (this.dataDisponivel()) {
-              this.confirmacaoReserva = true;
-              System.out.println("Pagemnto Realizado");
+  public boolean confirmarReserva(int numReserva) {
+    for (Reserva reserva : MackAirbnb.reservas) {
+      if (reserva.getReserva() == numReserva && reserva.getPropriedade().equals(this.getPropriedade())) {
+        if (reserva.isConfirmacaoReserva()) {
+          System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
+          return false;
+        } else {
+          if (reserva.realizarPagamento()) {
+            if (reserva.dataDisponivel()) {
+              reserva.confirmacaoReserva = true;
+              System.out.println("Pagamento Realizado");
               System.out.println("Reserva " + numReserva + " confirmada com sucesso.");
-            }
-            else {
-              System.out.println("A reserva " + numReserva + " não pode ser confirmada pois a propriedade não está disponível para as datas solicitadas.");
+              return true;
+            } else {
+              System.out.println("A reserva " + numReserva +
+                  " não pode ser confirmada pois a propriedade não está disponível para as datas solicitadas.");
+              return false;
             }
           } else {
             System.out.println("Falha no pagamento. Reserva não confirmada.");
+            return false;
           }
-        } else {
-          System.out.println("A reserva " + numReserva + " já foi confirmada anteriormente.");
         }
-      } else {
-        System.out.println("Esta propriedade não está mais disponível para reserva.");
       }
     }
+    return false;
   }
 
   private boolean realizarPagamento() {
