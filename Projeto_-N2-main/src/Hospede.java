@@ -163,11 +163,13 @@ public class Hospede extends Usuario {
 
   public void confirmarReservaPendente(int numReserva) {
     for (Reserva reserva : MackAirbnb.reservas) {
-      if (reserva.getReserva() == numReserva) {
+      if (reserva.getReserva() == numReserva && reserva.getHospede().equals(this)) {
         reserva.confirmarReserva(numReserva);
         return;
       }
     }
+    System.out.println("");
+    System.out.println("!!!!! Reserva não encontrada !!!!!");
   }
 
   public void avaliarPropriedade(int idReserva, Avaliacao avaliacao) {
