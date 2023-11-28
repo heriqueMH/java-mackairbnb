@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reserva {
-  private int numReserva = 0;
+  private int numReserva;
+  private static int count = 0;
   private Propriedade propriedade;
   private Hospede hospede;
   private LocalDate dataCheckIn;
@@ -17,14 +18,11 @@ public class Reserva {
     this.hospede = hospede;
     this.avaliacoes = new ArrayList<>();
     this.confirmacaoReserva = false;
+    this.numReserva = ++count;
   }
 
   public int getReserva() {
     return numReserva;
-  }
-
-  public void setId(int id) {
-    this.numReserva = id;
   }
 
   public void receberAvaliacao(Avaliacao avaliacao) {

@@ -6,7 +6,6 @@ public class MackAirbnb {
   public static List<Usuario> userCadastrado = new ArrayList<>();
   public static List<Propriedade> propriedades = new ArrayList<>();
   public static List<Reserva> reservas = new ArrayList<>();
-  public int proximoId = 1;
 
   public MackAirbnb() {
   }
@@ -19,7 +18,6 @@ public class MackAirbnb {
   }
 
   public void cadastrarPropriedade(Propriedade propriedade, Usuario proprietario) {
-    propriedade.setId(proximoId++);
     propriedade.setProprietario(proprietario);
     propriedades.add(propriedade);
     System.out.println("");

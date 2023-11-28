@@ -4,6 +4,7 @@ import java.util.List;
 public class Propriedade {
   private Usuario proprietario;
   private int id;
+  private static int count = 0;
   private String titulo;
   private String descricao;
   private String localizacao;
@@ -20,15 +21,11 @@ public class Propriedade {
     this.precoPorNoite = precoPorNoite;
     this.fotos = new ArrayList<>();
     this.avaliacoes = new ArrayList<>();
-    this.id = MackAirbnb.getInstancia().proximoId++;
+    this.id = ++count;
   }
 
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public void setProprietario(Usuario proprietario) {
@@ -44,7 +41,7 @@ public class Propriedade {
   }
 
   public double calcularCustoTotal(int quantidadeDias) { // ainda precisa ser ajudatado (o dia da saida do usuário pode
-    return quantidadeDias * precoPorNoite; // ser diferente do estipulado na Reserva)
+    return quantidadeDias * getPrecoPorNoite(); // ser diferente do estipulado na Reserva)
   }
 
   public String getTitulo() {

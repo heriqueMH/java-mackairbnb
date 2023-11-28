@@ -1,8 +1,9 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Scanner;
 
 public class Hospede extends Usuario {
-  private int numeroReserva;
+
   private static Scanner scanner;
 
   public Hospede(String nome, String cpf, String email, String endereco, String senha) {
@@ -16,6 +17,7 @@ public class Hospede extends Usuario {
   public void cadastrarNovaReserva() {
     int opcaoSubMenu;
     do {
+      System.out.println("");
       System.out.println("----- CADASTRAR NOVA RESERVA -----");
       System.out.println("1. Lista Propriedades");
       System.out.println("2. Selecionar propriedade");
@@ -53,21 +55,31 @@ public class Hospede extends Usuario {
     Propriedade propriedadeEscolhida = MackAirbnb.getPropriedadeId(id);
     if (propriedadeEscolhida != null) {
       System.out.println("Qual a Data de check-in (YYYY-MM-DD):");
-      String checkInStr = scanner.nextLine();
+      String checkInStr = scanner.next();
       LocalDate checkIn = LocalDate.parse(checkInStr);
 
       System.out.println("Qual a Data de check-out (YYYY-MM-DD):");
-      String checkOutStr = scanner.nextLine();
+      String checkOutStr = scanner.next();
       LocalDate checkOut = LocalDate.parse(checkOutStr);
 
       Reserva novaReserva = new Reserva(propriedadeEscolhida, this);
-      novaReserva.setId(numeroReserva++);
       novaReserva.setDataCheckIn(checkIn);
       novaReserva.setDataCheckOut(checkOut);
 
       MackAirbnb.reservas.add(novaReserva);
       System.out.println("");
       System.out.println("!!!!! Reserva cadastrada com sucesso. !!!!!");
+      System.out.println("");
+      System.out.println("Deseja confirmar sua reserva ? (S/N)");
+      System.out.println("");
+      Period periodo = Period.between(checkIn, checkOut);
+      int diferencaDias = periodo.getDays();
+      Propriedade propriedade = novaReserva.getPropriedade();
+      System.out.println("O valor previsto da reserva é de: " + propriedade.calcularCustoTotal(diferencaDias));
+      String resposta = scanner.next().toUpperCase();
+        if (resposta.equals("S")) {
+          novaReserva.confirmarReserva(novaReserva.getReserva());
+        }
     }
   }
 
@@ -83,7 +95,7 @@ public class Hospede extends Usuario {
 
     if (senha.equals(getSenha())) {
       for (Reserva reserva : MackAirbnb.reservas) {
-        if (reserva.getReserva() == numeroReserva) {
+        if (reserva.getReserva() == numReserva) {
           reservaParaExcluir = reserva;
           break;
         }
@@ -135,8 +147,6 @@ public class Hospede extends Usuario {
           System.out.print("Digite o número da reserva a ser confirmada: ");
           int numReserva = scanner.nextInt();
           confirmarReservaPendente(numReserva);
-        } else {
-          exibirMenu();
         }
       }
     }
@@ -229,6 +239,7 @@ public class Hospede extends Usuario {
           excluirReserva();
           break;
         case 5:
+          System.out.println("");
           System.out.println("!!!!! Saindo do programa... !!!!!");
           break;
         default:
