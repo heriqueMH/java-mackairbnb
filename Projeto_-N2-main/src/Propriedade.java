@@ -40,8 +40,8 @@ public class Propriedade {
     avaliacoes.add(avaliacao);
   }
 
-  public double calcularCustoTotal(int quantidadeDias) { // ainda precisa ser ajudatado (o dia da saida do usuário pode
-    return quantidadeDias * getPrecoPorNoite(); // ser diferente do estipulado na Reserva)
+  public double calcularCustoTotal(int quantidadeDias) {
+    return quantidadeDias * getPrecoPorNoite(); 
   }
 
   public String getTitulo() {
