@@ -14,11 +14,11 @@ public class Menu {
     int opcaoMenu = 0;
     do {
       System.out.println("");
-      System.out.println("----- MENU -----");
-      System.out.println("1. Usuário já cadastrado");
+      System.out.println("---------- MENU ----------");
+      System.out.println("1. Fazer login");
       System.out.println("2. Cadastrar novo usuário");
       System.out.println("3. Excluir usuário");
-      System.out.println("4. Sair do programa");
+      System.out.println("4. Encerrar programa");
       System.out.print("Escolha uma opção: ");
       opcaoMenu = scanner.nextInt();
       scanner.nextLine();
