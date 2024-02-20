@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 public class Instancia {
-        public Instancia() {
+        public static void instancia() {
                 Hospede hospede = new Hospede("Maria", "987654321", "maria@example.com", "Rua B", "senhaHospede");
                 Usuario.cadastrarNovoUsuario(hospede);
 
